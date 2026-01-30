@@ -1,6 +1,0 @@
-document.addEventListener("touchmove", (e) => {
-  const touch = e.touches[0];
-  const x = (window.innerWidth / 2 - touch.clientX) / 25;
-  const y = (window.innerHeight / 2 - touch.clientY) / 25;
-  card.style.transform = `rotateY(${x}deg) rotateX(${y}deg)`;
-});
