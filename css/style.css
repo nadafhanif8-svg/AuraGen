@@ -48,9 +48,7 @@ body {
 }
 
 /* 3D CARD */
-.hero-3d {
-  perspective: 1200px;
-}
+.hero-3d { perspective: 1200px; }
 
 .card {
   width: 320px;
@@ -60,12 +58,11 @@ body {
   padding: 30px;
   backdrop-filter: blur(15px);
   transform-style: preserve-3d;
-  position: relative;
-  transition: transform 0.3s ease;
+  transition: transform 0.25s ease;
 }
 
 .card h3 { transform: translateZ(40px); }
-.card p  { transform: translateZ(25px); color: #cbd5f5; }
+.card p { transform: translateZ(25px); color: #cbd5f5; }
 
 .glow {
   position: absolute;
@@ -99,58 +96,9 @@ section {
   padding: 30px;
   border-radius: 20px;
   backdrop-filter: blur(12px);
-  opacity: 0;
-  transform: translateY(40px);
-  transition: all 0.7s ease;
 }
 
-.show {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* PRICING */
-.price {
-  font-size: 2.5rem;
-  margin: 20px 0;
-  background: linear-gradient(90deg, #22d3ee, #a855f7);
-  -webkit-background-clip: text;
-  color: transparent;
-}
-
-.pricing-btn {
-  width: 100%;
-  padding: 12px;
-  border: none;
-  border-radius: 12px;
-  cursor: pointer;
-  background: linear-gradient(90deg, #22d3ee, #a855f7);
-  color: #000;
-}
-
-.featured {
-  box-shadow: 0 0 50px rgba(168,85,247,0.35);
-}
-
-/* CTA + FOOTER */
-.cta-section {
-  background: linear-gradient(180deg, transparent, #020617);
-}
-
-.footer {
-  padding: 40px;
-  text-align: center;
-  color: #94a3b8;
-}
-.footer {
-  background: radial-gradient(circle at top, #0f172a, #020617);
-  color: #cbd5f5;
-  padding: 80px 8% 30px;
-  margin-top: 120px;
-}
-
-/* rest of footer css ... */
-
+/* SCROLL REVEAL */
 .reveal {
   opacity: 0;
   transform: translateY(60px);
@@ -161,62 +109,28 @@ section {
   opacity: 1;
   transform: translateY(0);
 }
-/* Scroll reveal base */
-.reveal {
-  opacity: 0;
-  transform: translateY(60px) scale(0.96);
-  transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
-}
 
-/* Jab visible ho */
-.reveal.active {
-  opacity: 1;
-  transform: translateY(0) scale(1);
-}
-
-/* AUTH SECTION */
+/* AUTH */
 .auth {
-  padding: 120px 20px;
   max-width: 420px;
-  margin: 0 auto;
+  margin: auto;
   text-align: center;
-}
-
-.auth h2 {
-  font-size: 2.2rem;
-  margin-bottom: 30px;
 }
 
 .auth input {
   width: 100%;
-  padding: 14px 16px;
-  margin-bottom: 14px;
+  padding: 14px;
+  margin-bottom: 12px;
   border-radius: 12px;
   border: none;
-  outline: none;
   background: rgba(255,255,255,0.08);
   color: #fff;
-  font-size: 1rem;
 }
 
-.auth input::placeholder {
-  color: #aaa;
+/* FOOTER */
+.footer {
+  background: radial-gradient(circle at top, #0f172a, #020617);
+  padding: 60px 8%;
+  text-align: center;
+  color: #cbd5f5;
 }
-
-.auth button {
-  width: 100%;
-  padding: 14px;
-  margin-top: 10px;
-  border-radius: 30px;
-  border: none;
-  cursor: pointer;
-  font-weight: 600;
-  background: linear-gradient(90deg, #7f5cff, #00ffe1);
-  color: #000;
-}
-
-.divider {
-  margin: 25px 0;
-  color: #888;
-}
-
