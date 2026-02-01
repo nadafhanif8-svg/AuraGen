@@ -18,6 +18,8 @@ window.login = function () {
   const password = document.getElementById("login-password").value;
 
   signInWithEmailAndPassword(auth, email, password)
-    .then(() => alert("Login successful ✅"))
+    .then(() => {
+      window.location.href = "dashboard.html"; // ✅ yaha redirect hoga
+    })
     .catch(err => alert(err.message));
 };
