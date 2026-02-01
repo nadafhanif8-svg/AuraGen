@@ -4,7 +4,7 @@ import {
   signInWithEmailAndPassword
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-window.signup = function () {
+window.signup = () => {
   const email = document.getElementById("signup-email").value;
   const password = document.getElementById("signup-password").value;
 
@@ -13,7 +13,7 @@ window.signup = function () {
     .catch(err => alert(err.message));
 };
 
-window.login = function () {
+window.login = () => {
   const email = document.getElementById("login-email").value;
   const password = document.getElementById("login-password").value;
 
