@@ -3,8 +3,8 @@ import { getAuth } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth
 
 const firebaseConfig = {
   apiKey: "XXXX",
-  authDomain: "XXXX",
-  projectId: "XXXX",
+  authDomain: "auragen.firebaseapp.com",
+  projectId: "auragen",
   appId: "XXXX"
 };
 
