@@ -36,15 +36,19 @@ window.signup = function () {
   const password = document.getElementById("signup-password").value;
 
   createUserWithEmailAndPassword(auth, email, password)
-    .then(() => alert("Account created successfully"))
-    .catch(err => {
-  if (err.code === "auth/email-already-in-use") {
-    alert("Account already exists. Please login.");
-  } else {
-    alert(err.message);
-  }
-});
+  .then(async (userCredential) => {
+    const user = userCredential.user;
 
-};
+    await setDoc(doc(db, "users", user.uid), {
+      email: user.email,
+      createdAt: serverTimestamp()
+    });
+
+    window.location.href = "dashboard.html";
+  })
+  .catch((error) => {
+    alert(error.message);
+  });
+
 
 
