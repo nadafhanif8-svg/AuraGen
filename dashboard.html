@@ -2,42 +2,35 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>AuraGen Dashboard</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="css/dashboard.css" />
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 
 <body>
 
   <!-- TOP BAR -->
-  <header class="topbar">
-    <h2>AuraGen<span>3D</span></h2>
+  <div class="topbar">
+    <h2>AuraGen <span>Dashboard</span></h2>
     <button id="logoutBtn">Logout</button>
-  </header>
+  </div>
 
   <!-- DASHBOARD -->
-  <main class="dashboard">
-    <h1>Welcome to AuraGen 🚀</h1>
-    <p>Your AI creative dashboard</p>
+  <section class="dashboard">
+    <h1>Welcome 👋</h1>
+    <p id="userEmail">Loading...</p>
 
-    <div class="cards">
-      <div class="dash-card">
-        <h3>🎬 AI Video</h3>
-        <p>Generate cinematic AI videos</p>
-      </div>
-
-      <div class="dash-card">
-        <h3>🖼 AI Images</h3>
-        <p>Create stunning AI visuals</p>
-      </div>
-
-      <div class="dash-card">
-        <h3>⚡ 3D UI</h3>
-        <p>Interactive 3D components</p>
-      </div>
+    <div class="dash-grid">
+      <div class="dash-card">AI Image Generator</div>
+      <div class="dash-card">AI Video Generator</div>
+      <div class="dash-card">My Projects</div>
+      <div class="dash-card">Settings</div>
     </div>
-  </main>
+  </section>
 
+  <!-- SCRIPTS -->
+  <script type="module" src="js/firebase.js"></script>
   <script type="module" src="js/dashboard.js"></script>
+
 </body>
 </html>
