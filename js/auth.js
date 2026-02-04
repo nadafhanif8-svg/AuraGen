@@ -14,7 +14,14 @@ window.login = function () {
       alert("Login successful");
       window.location.href = "dashboard.html";
     })
-    .catch(err => alert(err.message));
+    .catch(err => {
+  if (err.code === "auth/email-already-in-use") {
+    alert("Account already exists. Please login.");
+  } else {
+    alert(err.message);
+  }
+});
+
 };
 
 // SIGNUP
@@ -24,5 +31,13 @@ window.signup = function () {
 
   createUserWithEmailAndPassword(auth, email, password)
     .then(() => alert("Account created successfully"))
-    .catch(err => alert(err.message));
+    .catch(err => {
+  if (err.code === "auth/email-already-in-use") {
+    alert("Account already exists. Please login.");
+  } else {
+    alert(err.message);
+  }
+});
+
 };
+
