@@ -23,11 +23,24 @@
     <p id="userEmail" style="margin-top:20px;font-weight:600;"></p>
 
     <div class="dash-grid">
-      <div class="dash-card">AI Image Generator</div>
-      <div class="dash-card">AI Video Generator</div>
-      <div class="dash-card">My Projects</div>
-      <div class="dash-card">Settings</div>
-    </div>
+  <div class="dash-card" onclick="useCredits(10)">
+    AI Image Generator<br>
+    <small>Uses 10 credits</small>
+  </div>
+
+  <div class="dash-card" onclick="useCredits(25)">
+    AI Video Generator<br>
+    <small>Uses 25 credits</small>
+  </div>
+
+  <div class="dash-card">
+    My Projects
+  </div>
+
+  <div class="dash-card">
+    Settings
+  </div>
+</div>
   </section>
 
   <!-- SCRIPTS -->
@@ -36,6 +49,7 @@
 
 </body>
 </html>
+
 
 
 
