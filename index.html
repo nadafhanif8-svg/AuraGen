@@ -79,27 +79,48 @@
     </div>
   </section>
 
-  <!-- PRICING -->
-  <section class="pricing reveal">
-    <h2>Pricing</h2>
+<!-- PRICING -->
+<section class="pricing reveal">
+  <h2>Pricing</h2>
 
-    <div class="pricing-grid">
-      <div class="pricing-card">
-        <h3>Starter</h3>
-        <p class="price">Free</p>
-      </div>
+  <div class="pricing-grid">
 
-      <div class="pricing-card featured">
-        <h3>Pro</h3>
-        <p class="price">$19/mo</p>
-      </div>
+    <!-- STARTER -->
+    <div class="pricing-card">
+      <h3>Starter</h3>
+      <p class="price">Free</p>
+      <p class="credits">150 Credits</p>
 
-      <div class="pricing-card">
-        <h3>Studio</h3>
-        <p class="price">$49/mo</p>
-      </div>
+      <button onclick="selectPlan('starter', 150)">
+        Get Started
+      </button>
     </div>
-  </section>
+
+    <!-- PRO -->
+    <div class="pricing-card featured">
+      <h3>Pro</h3>
+      <p class="price">$19/mo</p>
+      <p class="credits">600 Credits</p>
+
+      <button onclick="selectPlan('pro', 600)">
+        Choose Pro
+      </button>
+    </div>
+
+    <!-- STUDIO -->
+    <div class="pricing-card">
+      <h3>Studio</h3>
+      <p class="price">$49/mo</p>
+      <p class="credits">2000 Credits</p>
+
+      <button onclick="selectPlan('studio', 2000)">
+        Choose Studio
+      </button>
+    </div>
+
+  </div>
+</section>
+
 
   <!-- AUTH -->
   <section class="auth reveal">
@@ -144,6 +165,7 @@
 
 </body>
 </html>
+
 
 
 
