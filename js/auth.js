@@ -2,14 +2,18 @@ import { auth, db } from "./firebase.js";
 
 import {
   signInWithEmailAndPassword,
-  createUserWithEmailAndPassword
+  createUserWithEmailAndPassword,
+  onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
 import {
   doc,
   setDoc,
+  getDoc,
   serverTimestamp
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+const OWNER_EMAIL = "nadafhanif71@gmail.com";
 
 /* =====================
    SIGNUP
@@ -17,6 +21,11 @@ import {
 window.signup = async function () {
   const email = document.getElementById("signup-email").value;
   const password = document.getElementById("signup-password").value;
+
+  if (!email || !password) {
+    alert("Enter email & password");
+    return;
+  }
 
   try {
     const userCredential = await createUserWithEmailAndPassword(
@@ -26,15 +35,16 @@ window.signup = async function () {
     );
 
     const user = userCredential.user;
+    const isOwner = email === OWNER_EMAIL;
 
     await setDoc(doc(db, "users", user.uid), {
       email: user.email,
-      plan: "starter",
-      credits: 150,
+      plan: isOwner ? "owner" : "starter",
+      credits: isOwner ? "unlimited" : 150,
       createdAt: serverTimestamp()
     });
 
-    alert("Signup successful");
+    window.location.href = "dashboard.html";
   } catch (error) {
     alert(error.message);
   }
@@ -49,7 +59,7 @@ window.login = async function () {
 
   try {
     await signInWithEmailAndPassword(auth, email, password);
-    alert("Login successful");
+    window.location.href = "dashboard.html";
   } catch (error) {
     alert(error.message);
   }
@@ -71,5 +81,22 @@ window.selectPlan = async function (plan, credits) {
     { merge: true }
   );
 
+  document.querySelector(".pricing").style.display = "none";
   alert(`Plan ${plan} activated`);
 };
+
+/* =====================
+   HIDE PRICING IF PLAN EXISTS
+===================== */
+onAuthStateChanged(auth, async (user) => {
+  if (!user) return;
+
+  const snap = await getDoc(doc(db, "users", user.uid));
+  if (!snap.exists()) return;
+
+  const data = snap.data();
+  if (data.plan && data.plan !== "starter") {
+    const pricing = document.querySelector(".pricing");
+    if (pricing) pricing.style.display = "none";
+  }
+});
