@@ -28,3 +28,24 @@ window.signup = async function () {
     }
   }
 };
+// ===== PRICING PLAN SELECTION =====
+window.selectPlan = async function(plan, credits) {
+  const user = auth.currentUser;
+
+  if (!user) {
+    alert("Please login first");
+    return;
+  }
+
+  await setDoc(
+    doc(db, "users", user.uid),
+    {
+      plan: plan,
+      credits: credits
+    },
+    { merge: true }
+  );
+
+  alert(`Plan "${plan}" activated successfully`);
+};
+
