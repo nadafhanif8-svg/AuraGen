@@ -1,37 +1,65 @@
-// SIGNUP
+import { auth, db } from "./firebase.js";
+
+import {
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+import {
+  doc,
+  setDoc,
+  serverTimestamp
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+/* =====================
+   SIGNUP
+===================== */
 window.signup = async function () {
   const email = document.getElementById("signup-email").value;
   const password = document.getElementById("signup-password").value;
 
   try {
-    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-    const user = userCredential.user;
+    const userCredential = await createUserWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
 
-    // OWNER CHECK
-    const isOwner = email === "nadafhanif71@gmail.com";
+    const user = userCredential.user;
 
     await setDoc(doc(db, "users", user.uid), {
       email: user.email,
-      role: isOwner ? "owner" : "user",
-      plan: isOwner ? "owner-unlimited" : "basic",
-      credits: isOwner ? "unlimited" : 150,
+      plan: "starter",
+      credits: 150,
       createdAt: serverTimestamp()
     });
 
-    window.location.href = "dashboard.html";
-
+    alert("Signup successful");
   } catch (error) {
-    if (error.code === "auth/email-already-in-use") {
-      alert("Account already exists. Please login.");
-    } else {
-      alert(error.message);
-    }
+    alert(error.message);
   }
 };
-// ===== PRICING PLAN SELECTION =====
-window.selectPlan = async function(plan, credits) {
-  const user = auth.currentUser;
 
+/* =====================
+   LOGIN
+===================== */
+window.login = async function () {
+  const email = document.getElementById("login-email").value;
+  const password = document.getElementById("login-password").value;
+
+  try {
+    await signInWithEmailAndPassword(auth, email, password);
+    alert("Login successful");
+  } catch (error) {
+    alert(error.message);
+  }
+};
+
+/* =====================
+   PRICING
+===================== */
+window.selectPlan = async function (plan, credits) {
+  const user = auth.currentUser;
   if (!user) {
     alert("Please login first");
     return;
@@ -39,13 +67,9 @@ window.selectPlan = async function(plan, credits) {
 
   await setDoc(
     doc(db, "users", user.uid),
-    {
-      plan: plan,
-      credits: credits
-    },
+    { plan, credits },
     { merge: true }
   );
 
-  alert(`Plan "${plan}" activated successfully`);
+  alert(`Plan ${plan} activated`);
 };
-
