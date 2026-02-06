@@ -1,42 +1,39 @@
-import { db } from "./firebase.js";
-import {
-  doc,
-  setDoc,
-  serverTimestamp
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-import { auth } from "./firebase.js";
+import { auth, db } from "./firebase.js";
+
 import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
+import {
+  doc,
+  setDoc,
+  serverTimestamp
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+
 // LOGIN
-window.login = function () {
+window.login = async function () {
   const email = document.getElementById("login-email").value;
   const password = document.getElementById("login-password").value;
 
-  signInWithEmailAndPassword(auth, email, password)
-    .then(() => {
-      alert("Login successful");
-      window.location.href = "dashboard.html";
-    })
-    .catch(err => {
-  if (err.code === "auth/email-already-in-use") {
-    alert("Account already exists. Please login.");
-  } else {
+  try {
+    await signInWithEmailAndPassword(auth, email, password);
+    window.location.href = "dashboard.html";
+  } catch (err) {
     alert(err.message);
+    console.error(err);
   }
-});
-
 };
 
-// SIGNUP
-window.signup = function () {
+
+// SIGNUP 🔥 (THIS CREATES FIRESTORE USER)
+window.signup = async function () {
   const email = document.getElementById("signup-email").value;
   const password = document.getElementById("signup-password").value;
 
-  createUserWithEmailAndPassword(auth, email, password)
-  .then(async (userCredential) => {
+  try {
+    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
     const user = userCredential.user;
 
     await setDoc(doc(db, "users", user.uid), {
@@ -44,11 +41,12 @@ window.signup = function () {
       createdAt: serverTimestamp()
     });
 
+    console.log("🔥 Firestore user created:", user.uid);
+
     window.location.href = "dashboard.html";
-  })
-  .catch((error) => {
+
+  } catch (error) {
     alert(error.message);
-  });
-
-
-
+    console.error(error);
+  }
+};
